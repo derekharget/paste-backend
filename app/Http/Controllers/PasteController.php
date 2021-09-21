@@ -26,7 +26,8 @@ class PasteController extends Controller
         //Validate Request
         try {
             $this->validate(request(), [
-                'Paste' => 'required',
+                'title' => 'required',
+                'paste' => 'required',
                 'isPrivate' => 'required|boolean',
             ]);
         } catch (ValidationException $e) {
@@ -37,7 +38,8 @@ class PasteController extends Controller
             $newPaste = $paste->create([
                 'user_id' => request()->user()->id,
                 'slug' => Str::random(8),
-                'Paste' => request()->paste,
+                'title' => request()->title,
+                'paste' => request()->paste,
                 'isPrivate' => request()->isPrivate
             ]);
         } catch (\Exception $e) {
