@@ -61,22 +61,45 @@ class PasteController extends Controller
     public function show(Paste $paste, $slug)
     {
 
-            $payload = $paste->where('slug', $slug)->first();
+        $payload = $paste->where('slug', $slug)->first();
 
-            if(is_null($payload)){
-                return response()->json([
-                    'response' => 'not found'
-                ], 404);
-            }
-
+        if (is_null($payload)) {
             return response()->json([
-                'response' => 'success',
-                'data' => $payload
-            ], 200);
+                'response' => 'not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'response' => 'success',
+            'data' => $payload
+        ], 200);
+
+
+    }
+
+
+    public function latest(Paste $paste)
+    {
+
+        $payload = $paste->latest()->take(5)->get();
+
+        if(is_null($payload)){
+            return response()->json([
+                'response' => 'not found'
+            ], 404);
+        }
+
+
+        return response()->json([
+            'response' => 'success',
+            'data' => $payload
+        ], 200);
 
 
 
     }
+
+
 
     public function update(Paste $paste, $slug)
     {

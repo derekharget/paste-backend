@@ -17,7 +17,8 @@ class PasteFactory extends Factory
     	return [
             'user_id' => User::factory(),
             'slug' => Str::random(8),
-            'Paste' => collect($this->faker->paragraphs(6))->map(fn($item) => "\n{$item}\n")->implode(''),
+            'title' => $this->faker->sentence(6),
+            'paste' => collect($this->faker->paragraphs(6))->map(fn($item) => "\n{$item}\n")->implode(''),
             'isPrivate' => true
     	];
     }

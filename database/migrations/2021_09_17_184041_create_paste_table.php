@@ -18,7 +18,8 @@ class CreatePasteTable extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->references('id')->on('users')->onDelete('cascade');
             $table->string('slug', 8)->unique();
-            $table->text('Paste');
+            $table->string('title');
+            $table->text('paste');
             $table->boolean('isPrivate');
             $table->timestamps();
         });

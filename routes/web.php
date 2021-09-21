@@ -27,14 +27,17 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // Public Paste URL
     $router->get('/paste/{slug}', 'PasteController@show');
 
+    // Get latest 10 pastes
+    $router->get('/latest', 'PasteController@latest');
+
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->post('/logout', 'AuthController@logout');
 
         // Authenticated Paste URLs
-        $router->post('/Paste', 'PasteController@create');
-        $router->patch('/Paste/{slug}', 'PasteController@update');
-        $router->delete('/Paste/{slug}', 'PasteController@destroy');
+        $router->post('/paste', 'PasteController@create');
+        $router->patch('/paste/{slug}', 'PasteController@update');
+        $router->delete('/paste/{slug}', 'PasteController@destroy');
 
     });
 });
