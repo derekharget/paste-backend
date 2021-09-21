@@ -48,9 +48,6 @@ class PasteController extends Controller
             ], 500);
         }
 
-        // Include new URL in data payload
-        $newPaste['url'] = env('APP_URL') . '/Paste/' . $newPaste['slug'];
-        $newPaste['api_ref'] = env('APP_URL') . '/api/Paste/' . $newPaste['slug'];
 
         return response()->json([
             'response' => 'Paste Created Successfully',
