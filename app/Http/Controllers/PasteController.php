@@ -81,7 +81,7 @@ class PasteController extends Controller
     public function latest(Paste $paste)
     {
 
-        $payload = $paste->latest()->take(5)->get();
+        $payload = $paste->latest()->take(10)->get();
 
         if(is_null($payload)){
             return response()->json([
