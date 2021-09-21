@@ -34,6 +34,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->post('/logout', 'AuthController@logout');
 
+        $router->get('/getUsersPastes', 'PasteController@getUsersPastes');
+
         // Authenticated Paste URLs
         $router->post('/paste', 'PasteController@create');
         $router->patch('/paste/{slug}', 'PasteController@update');

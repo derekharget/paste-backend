@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Paste;
 use http\Env;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -21,7 +22,7 @@ class PasteController extends Controller
     }
 
 
-    public function create(Paste $paste)
+    public function create(Paste $paste): JsonResponse
     {
         //Validate Request
         try {
@@ -57,7 +58,7 @@ class PasteController extends Controller
     }
 
 
-    public function show(Paste $paste, $slug)
+    public function show(Paste $paste, $slug): JsonResponse
     {
 
         $payload = $paste->where('slug', $slug)->first();
@@ -77,7 +78,7 @@ class PasteController extends Controller
     }
 
 
-    public function latest(Paste $paste)
+    public function latest(Paste $paste): JsonResponse
     {
 
         $payload = $paste->latest()->take(10)->get();
@@ -99,8 +100,31 @@ class PasteController extends Controller
     }
 
 
+    public function getUsersPastes(Paste $paste): JsonResponse
+    {
 
-    public function update(Paste $paste, $slug)
+        $payload = $paste->where('user_id', '=', request()->user()->id)->latest()->get();
+
+
+        if(is_null($payload)){
+            return response()->json([
+                'response' => 'not found'
+            ], 404);
+        }
+
+
+        return response()->json([
+            'response' => 'success',
+            'data' => $payload
+        ], 200);
+
+
+
+    }
+
+
+
+    public function update(Paste $paste, $slug): JsonResponse
     {
         // find Paste
 
@@ -141,7 +165,7 @@ class PasteController extends Controller
     }
 
 
-    public function destroy(Paste $paste, $slug)
+    public function destroy(Paste $paste, $slug): JsonResponse
     {
         $payload = $paste->where('slug', $slug)->first();
 
