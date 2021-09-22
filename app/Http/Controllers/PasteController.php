@@ -28,8 +28,7 @@ class PasteController extends Controller
         try {
             $this->validate(request(), [
                 'title' => 'required',
-                'paste' => 'required',
-                'isPrivate' => 'required|boolean',
+                'paste' => 'required'
             ]);
         } catch (ValidationException $e) {
             return response()->json(['validation'], 400);
@@ -40,8 +39,7 @@ class PasteController extends Controller
                 'user_id' => request()->user()->id,
                 'slug' => Str::random(8),
                 'title' => request()->title,
-                'paste' => request()->paste,
-                'isPrivate' => request()->isPrivate
+                'paste' => request()->paste
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -142,8 +140,8 @@ class PasteController extends Controller
 
         try {
             $this->validate(request(), [
-                'Paste' => 'required',
-                'isPrivate' => 'required|boolean',
+                'paste' => 'required',
+                'title' => 'required',
             ]);
         } catch (ValidationException $e) {
             return response()->json(['validation'], 400);
@@ -151,8 +149,8 @@ class PasteController extends Controller
 
         //commit
 
-        $payload['Paste'] = request()->paste;
-        $payload['isPrivate'] = request()->isPrivate;
+        $payload['paste'] = request()->paste;
+        $payload['title'] = request()->title;
 
         $payload->save();
 
@@ -178,6 +176,6 @@ class PasteController extends Controller
         $payload->delete();
 
 
-        return response()->json(['gone'], 410);
+        return response()->json(['gone'], 200);
     }
 }

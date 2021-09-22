@@ -20,7 +20,6 @@ class CreatePasteTable extends Migration
             $table->string('slug', 8)->unique();
             $table->string('title');
             $table->text('paste');
-            $table->boolean('isPrivate');
             $table->timestamps();
         });
     }
