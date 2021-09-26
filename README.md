@@ -1,4 +1,4 @@
-# Paste Backend
+# Pastebin Clone Backend
 
 Backend API for a pastebin clone that was apart of me learning both Laravel (**Lumen) and React
 
