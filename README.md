@@ -36,6 +36,6 @@ php artisan serve
 
 ### Production
 
-- Set the "Access-Control-Allow-Origin" header to your application's domain
+- Set the "Access-Control-Allow-Origin" header to your application's domain, located in /app/Http/Middleware/CorsMiddleware.php
 
 - Configure your webserver like most laravel applications to send all requests to /public/index.php
